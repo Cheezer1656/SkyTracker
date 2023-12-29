@@ -5,7 +5,16 @@ $theme-colors: (
     primary: #444444,
     secondary: #353535,
     tertiary: #7a7a7a,
-    info: #4294d8
+    info: #3194e4
 );
+
+
+body {
+    color: white;
+}
+
+.dropdown-menu > li > a:hover {
+    background-color: $secondary;
+}
 
 @import "node_modules/bootstrap/scss/bootstrap.scss";
