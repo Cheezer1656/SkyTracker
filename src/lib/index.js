@@ -2,13 +2,21 @@ export async function get_bz_data() {
     return await fetch("https://api.hypixel.net/v2/skyblock/bazaar").then(res => res.json());
 }
 
-const sortMethods = {
+export async function get_ah_crafts() {
+    return await fetch("https://sky.coflnet.com/api/craft/profit").then(res => res.json());
+}
+
+const flipSortMethods = {
     "margin": (x, y) => (x.quick_status.buyPrice - x.quick_status.sellPrice) / x.quick_status.sellPrice - (y.quick_status.buyPrice - y.quick_status.sellPrice) / y.quick_status.sellPrice,
     "profit": (x, y) => x.quick_status.buyPrice - x.quick_status.sellPrice - y.quick_status.buyPrice + y.quick_status.sellPrice,
     "buyPrice": (x, y) => x.quick_status.buyPrice - y.quick_status.buyPrice,
     "sellPrice": (x, y) => x.quick_status.sellPrice - y.quick_status.sellPrice,
     "buyVolume": (x, y) => x.quick_status.buyMovingWeek - y.quick_status.buyMovingWeek,
     "sellVolume": (x, y) => x.quick_status.sellMovingWeek - y.quick_status.sellMovingWeek
+}
+
+const craftSortMethods = {
+    "profit": (x, y) => (x.sellPrice-x.craftCost)-(y.sellPrice-y.craftCost),
 }
 
 export function process_bz_data(data, settings) {
@@ -26,7 +34,14 @@ export function process_bz_data(data, settings) {
             results.push(product);
         }
     }
-    results.sort(sortMethods[settings.sortBy]);
+    results.sort(flipSortMethods[settings.sortBy]);
+    results.reverse();
+    return results;
+}
+
+export function process_ah_data(data, settings) {
+    var results = data.slice();
+    results.sort(craftSortMethods[settings.sortBy]);
     results.reverse();
     return results;
 }

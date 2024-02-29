@@ -3,7 +3,7 @@
 </svelte:head>
 
 <script>
-    import ProductPreview from "src/components/productPreview.svelte";
+    import FlipPreview from "src/components/FlipPreview.svelte";
     import { get_bz_data, friendly_name } from "$lib";
     import { page } from "$app/stores";
 
@@ -22,7 +22,7 @@
                 <div class="row row-cols-1 row-cols-md-2 g-4 p-5 pt-0">
                     {#each data as product}
                         <div class="col">
-                            <ProductPreview {product} />
+                            <FlipPreview {product} />
                         </div>
                     {/each}
                 </div>
