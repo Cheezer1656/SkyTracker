@@ -11,7 +11,7 @@
     }
 
     async function get_processed_data() {
-        return process_ah_data(await get_ah_crafts(), settings);
+        return await process_ah_data(await get_ah_crafts(), settings);
     }
 </script>
 
