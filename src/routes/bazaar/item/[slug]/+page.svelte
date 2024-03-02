@@ -14,7 +14,13 @@
 </script>
 
 <div class="container text-center p-3">
-    <h1 class="text-white">{friendly_name(status.productId)}</h1>
+    <h1 class="text-white">
+        {#await friendly_name(status.productId)}
+            {status.productId}
+        {:then itemName} 
+            {itemName}
+        {/await}
+    </h1>
     <div class="row row-cols-2 g-2 p-3">
         <div class="col">
             <div class="bg-primary text-center p-3 rounded">

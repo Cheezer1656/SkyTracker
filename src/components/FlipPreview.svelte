@@ -2,6 +2,7 @@
     import { simplify_num, friendly_name } from "$lib";
 
     export let product;
+    var productID = product.productId;
     var buyPrice = product.buyPrice;
     var sellPrice = product.sellPrice;
     var buyVolume = product.buyMovingWeek;
@@ -10,7 +11,13 @@
 
 <div class="card border-primary mb-3 position-relative h-100">
     <div class="card-header bg-primary">
-        <a class="card-title text-info text-decoration-none" href={"/bazaar/item/"+product.productId}><strong>{friendly_name(product.productId)}</strong></a>
+        <a class="card-title text-info text-decoration-none" href={"/bazaar/item/"+product.productId}><strong>
+            {#await friendly_name(productID)}
+                {productID}
+            {:then itemName} 
+                {itemName}
+            {/await}
+        </strong></a>
     </div>
     <div class="card-body bg-primary">
         <p class="card-text text-tertiary">

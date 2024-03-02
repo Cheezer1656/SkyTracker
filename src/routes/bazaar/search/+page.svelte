@@ -8,7 +8,7 @@
     import { page } from "$app/stores";
 
     async function get_filtered_data() {
-        return await get_bz_data().then(data => Object.values(data.products).map(product => product.quick_status).filter(product => friendly_name(product.productId).toLowerCase().includes($page.url.searchParams.get("q").toLowerCase())));
+        return await get_bz_data().then(data => Object.values(data.products).map(product => product.quick_status).filter(async product => await friendly_name(product.productId).toLowerCase().includes($page.url.searchParams.get("q").toLowerCase())));
     }
 </script>
 

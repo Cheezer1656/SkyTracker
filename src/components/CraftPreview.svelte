@@ -2,7 +2,7 @@
     import { simplify_num, friendly_name } from "$lib";
 
     export let product;
-    var itemName = product.itemName;
+    var itemID = product.itemId;
     var craftCost = product.craftCost;
     var sellPrice = product.sellPrice;
     var median = product.median;
@@ -10,7 +10,13 @@
 
 <div class="card border-primary mb-3 position-relative h-100">
     <div class="card-header bg-primary">
-        <a class="card-title text-info text-decoration-none" href="#"><strong>{friendly_name(itemName)}</strong></a>
+        <a class="card-title text-info text-decoration-none" href="#"><strong>
+            {#await friendly_name(itemID)}
+                {itemID}
+            {:then itemName} 
+                {itemName}
+            {/await}
+        </strong></a>
     </div>
     <div class="card-body bg-primary">
         <p class="card-text text-tertiary">

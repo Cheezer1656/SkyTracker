@@ -58,6 +58,13 @@ export function simplify_num(num) {
     }
 }
 
-export function friendly_name(name) {
-    return name.replace(/_/g, " ").replace(/(\w)(\w*)/g, (g0, g1, g2) => g1.toUpperCase() + g2.toLowerCase());
+var color_code_regex = RegExp("§.{1}")
+export async function friendly_name(id) {
+    var name = (await fetch(`https://raw.githubusercontent.com/NotEnoughUpdates/NotEnoughUpdates-REPO/master/items/${id}.json`).then(res => res.json())).displayname;
+    if (name.includes("Treasure Artifact")) {
+        console.log(name);
+        console.log(color_code_regex.exec(name));
+    }
+    name.matchAll(color_code_regex).forEach(match => {name = name.replaceAll(match, "")});
+    return name;
 }
