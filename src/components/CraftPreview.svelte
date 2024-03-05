@@ -10,7 +10,7 @@
 
 <div class="card border-primary mb-3 position-relative h-100">
     <div class="card-header bg-primary">
-        <a class="card-title text-info text-decoration-none" href="#"><strong>
+        <a class="card-title text-info text-decoration-none" href={"https://sky.coflnet.com/item/"+itemID}><strong>
             {#await friendly_name(itemID)}
                 {itemID}
             {:then itemName} 
