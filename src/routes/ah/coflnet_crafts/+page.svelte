@@ -1,5 +1,5 @@
 <svelte:head>
-    <title>SkyTracker - Crafts</title>
+    <title>SkyTracker - Coflnet Crafts</title>
 </svelte:head>
 
 <script>

@@ -22,7 +22,9 @@
         <p class="card-text text-tertiary">
             Craft Cost: <span class="text-white">{simplify_num(craftCost)} coins</span><br>
             Sell Price: <span class="text-white">{simplify_num(sellPrice)} coins</span><br>
+            {#if median}
             Median: <span class="text-white">{simplify_num(median)} coins</span><br>
+            {/if}
             Profit: <span class="text-white">{simplify_num(sellPrice - craftCost)}</span>
         </p>
     </div>

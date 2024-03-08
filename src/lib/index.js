@@ -2,8 +2,15 @@ export async function get_bz_data() {
     return await fetch("https://api.hypixel.net/v2/skyblock/bazaar").then(res => res.json());
 }
 
-export async function get_ah_crafts() {
+export async function get_coflnet_crafts() {
     return await fetch("https://sky.coflnet.com/api/craft/profit").then(res => res.json());
+}
+
+export async function get_lowest_bins() {
+    const ds = new DecompressionStream("gzip");
+    var stream = (await fetch("https://corsproxy.io/?http://moulberry.codes/lowestbin.json.gz")).body;
+    var decompressionStream = stream.pipeThrough(ds);
+    return await new Response(decompressionStream).json();
 }
 
 const flipSortMethods = {
@@ -39,7 +46,7 @@ export function process_bz_data(data, settings) {
     return results;
 }
 
-export function process_ah_data(data, settings) {
+export function process_coflnet_data(data, settings) {
     var results = data.slice();
     results.sort(craftSortMethods[settings.sortBy]);
     results.reverse();

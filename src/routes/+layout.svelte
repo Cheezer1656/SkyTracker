@@ -39,6 +39,7 @@
                                     Auction House
                                 </a>
                                 <ul class="dropdown-menu bg-secondary position-absolute" aria-labelledby="ah-dropdown">
+                                    <li><a class="dropdown-item text-white" href="/ah/coflnet_crafts">Coflnet Crafts</a></li>
                                     <li><a class="dropdown-item text-white" href="/ah/crafts">Crafts</a></li>
                                 </ul>
                             </li>
