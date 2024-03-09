@@ -6,9 +6,9 @@
 
 <div class="card border-primary mb-3 position-relative h-100">
     <div class="card-header bg-primary">
-        <a class="card-title text-info text-decoration-none" href={"https://sky.coflnet.com/item/"+product.itemId}><strong>
-            {product.itemName}
-        </strong></a>
+        <a class="card-title text-info text-decoration-none" href={"https://sky.coflnet.com/item/"+product.itemId} target="_blank">
+            <strong>{product.itemName}</strong>
+        </a>
     </div>
     <div class="card-body bg-primary">
         <p class="card-text text-tertiary">

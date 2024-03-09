@@ -11,7 +11,9 @@ export class SkyblockDataHandler {
 
     async update_data() {
         this.bz_data = await SkyblockDataHandler.get_bz_data();
+        this.bz_keys = Object.keys(this.bz_data);
         this.ah_data = await SkyblockDataHandler.get_lowest_bins();
+        this.ah_keys = Object.keys(this.ah_data);
     }
 
     static async get_bz_data() {
@@ -36,10 +38,10 @@ export class SkyblockDataHandler {
         id = id.replaceAll("-", ":");
         const item_info = this.item_mappings[id];
         var sell_price = null;
-        if (Object.keys(this.ah_data).includes(id)) {
+        if (this.ah_keys.includes(id)) {
             sell_price = this.ah_data[id];
         }
-        else if (Object.keys(this.bz_data).includes(id)) {
+        else if (this.bz_keys.includes(id)) {
             sell_price = this.bz_data[id].quick_status.sellPrice;
         }
         var price = 0

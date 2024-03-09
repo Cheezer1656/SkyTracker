@@ -3,13 +3,16 @@
 </svelte:head>
 
 <script>
-    import { SkyblockDataHandler, simplify_num } from "$lib";
+    import { SkyblockDataHandler } from "$lib";
     import CraftPreview from "src/components/CraftPreview.svelte";
+    import { browser } from "$app/environment";
 
     async function get_processed_data() {
-        const sb = await new SkyblockDataHandler();
-        const crafts = sb.find_crafts();
-        return crafts.splice(0, 50);
+        if (browser) {
+            const sb = await new SkyblockDataHandler();
+            const crafts = sb.find_crafts();
+            return crafts.splice(0, 50);
+        }
     }
 </script>
 

@@ -5,6 +5,7 @@
 <script>
     import { SkyblockDataHandler, friendly_name } from "$lib";
     import CraftPreview from "src/components/CraftPreview.svelte";
+    import { browser } from "$app/environment";
 
     const settings = {
         sortBy: "profit"
@@ -15,12 +16,14 @@
     }
 
     async function get_processed_data() {
-        const results = (await SkyblockDataHandler.get_coflnet_crafts()).slice();
-        results.sort(sortMethods[settings.sortBy]);
-        await Promise.all(results.map(async (x) => {
-            x.itemName = await friendly_name(x.itemId);
-        }));
-        return results;
+        if (browser) {
+            const results = (await SkyblockDataHandler.get_coflnet_crafts()).slice();
+            results.sort(sortMethods[settings.sortBy]);
+            await Promise.all(results.map(async (x) => {
+                x.itemName = await friendly_name(x.itemId);
+            }));
+            return results;
+        }
     }
 </script>
 

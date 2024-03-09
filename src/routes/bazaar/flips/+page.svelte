@@ -5,6 +5,7 @@
 <script>
     import { SkyblockDataHandler } from "$lib";
     import FlipPreview from "src/components/FlipPreview.svelte";
+    import { browser } from "$app/environment";
 
     const settings = {
         minBuyPrice: 1000,
@@ -26,22 +27,24 @@
     }
 
     async function get_processed_data() {
-        const results = [];
-        for (const product of Object.values(await SkyblockDataHandler.get_bz_data())) {
-            const status = product.quick_status;
-            const buyPrice = status.buyPrice;
-            const sellPrice = status.sellPrice;
-            const buyVolume = status.buyMovingWeek;
-            const sellVolume = status.sellMovingWeek;
-            if (buyPrice === null || sellPrice === null) {
-                continue;
+        if (browser) {
+            const results = [];
+            for (const product of Object.values(await SkyblockDataHandler.get_bz_data())) {
+                const status = product.quick_status;
+                const buyPrice = status.buyPrice;
+                const sellPrice = status.sellPrice;
+                const buyVolume = status.buyMovingWeek;
+                const sellVolume = status.sellMovingWeek;
+                if (buyPrice === null || sellPrice === null) {
+                    continue;
+                }
+                else if (buyPrice > settings.minBuyPrice && sellPrice > settings.minSellPrice && buyVolume > settings.minBuyVolume && sellVolume > settings.minSellVolume && ((buyPrice - sellPrice) / sellPrice * 100) > settings.minMargin && buyPrice - sellPrice > settings.minProfit) {
+                    results.push(product);
+                }
             }
-            else if (buyPrice > settings.minBuyPrice && sellPrice > settings.minSellPrice && buyVolume > settings.minBuyVolume && sellVolume > settings.minSellVolume && ((buyPrice - sellPrice) / sellPrice * 100) > settings.minMargin && buyPrice - sellPrice > settings.minProfit) {
-                results.push(product);
-            }
+            results.sort(sortMethods[settings.sortBy]);
+            return results.map(product => product.quick_status);
         }
-        results.sort(sortMethods[settings.sortBy]);
-        return results.map(product => product.quick_status);
     }
 </script>
 

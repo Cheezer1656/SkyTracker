@@ -17,7 +17,7 @@
                 </strong></a>
             </div>
             <div class="col text-end">
-                <a class="text-info text-decoration-none text-align-end" href={"https://www.skyblock.bz/product/"+product.productId}>
+                <a class="text-info text-decoration-none text-align-end" href={"https://www.skyblock.bz/product/"+product.productId} target="_blank">
                     <img src="https://www.skyblock.bz/favicon.ico" alt="Bazaar Meta">
                 </a>
             </div>
