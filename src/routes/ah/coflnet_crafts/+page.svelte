@@ -3,15 +3,24 @@
 </svelte:head>
 
 <script>
-    import { get_coflnet_crafts, process_coflnet_data } from "$lib";
+    import { SkyblockDataHandler, friendly_name } from "$lib";
     import CraftPreview from "src/components/CraftPreview.svelte";
 
     const settings = {
         sortBy: "profit"
     }
 
+    const sortMethods = {
+        "profit": (x, y) => (y.sellPrice-y.craftCost)-(x.sellPrice-x.craftCost),
+    }
+
     async function get_processed_data() {
-        return await process_coflnet_data(await get_coflnet_crafts(), settings);
+        const results = (await SkyblockDataHandler.get_coflnet_crafts()).slice();
+        results.sort(sortMethods[settings.sortBy]);
+        await Promise.all(results.map(async (x) => {
+            x.itemName = await friendly_name(x.itemId);
+        }));
+        return results;
     }
 </script>
 

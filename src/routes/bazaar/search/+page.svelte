@@ -4,11 +4,11 @@
 
 <script>
     import FlipPreview from "src/components/FlipPreview.svelte";
-    import { get_bz_data, friendly_name } from "$lib";
+    import { SkyblockDataHandler, strip_color_codes } from "$lib";
     import { page } from "$app/stores";
 
     async function get_filtered_data() {
-        return await get_bz_data().then(data => Object.values(data.products).map(product => product.quick_status).filter(async product => await friendly_name(product.productId).toLowerCase().includes($page.url.searchParams.get("q").toLowerCase())));
+        return await SkyblockDataHandler.get_bz_data().then(data => Object.values(data).map(product => product.quick_status).filter(async product => strip_color_codes(product.productId).toLowerCase().includes($page.url.searchParams.get("q").toLowerCase())));
     }
 </script>
 

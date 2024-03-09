@@ -2,30 +2,22 @@
     import { simplify_num, friendly_name } from "$lib";
 
     export let product;
-    var itemID = product.itemId;
-    var craftCost = product.craftCost;
-    var sellPrice = product.sellPrice;
-    var median = product.median;
 </script>
 
 <div class="card border-primary mb-3 position-relative h-100">
     <div class="card-header bg-primary">
-        <a class="card-title text-info text-decoration-none" href={"https://sky.coflnet.com/item/"+itemID}><strong>
-            {#await friendly_name(itemID)}
-                {itemID}
-            {:then itemName} 
-                {itemName}
-            {/await}
+        <a class="card-title text-info text-decoration-none" href={"https://sky.coflnet.com/item/"+product.itemId}><strong>
+            {product.itemName}
         </strong></a>
     </div>
     <div class="card-body bg-primary">
         <p class="card-text text-tertiary">
-            Craft Cost: <span class="text-white">{simplify_num(craftCost)} coins</span><br>
-            Sell Price: <span class="text-white">{simplify_num(sellPrice)} coins</span><br>
-            {#if median}
-            Median: <span class="text-white">{simplify_num(median)} coins</span><br>
+            Craft Cost: <span class="text-white">{simplify_num(product.craftCost)} coins</span><br>
+            Sell Price: <span class="text-white">{simplify_num(product.sellPrice)} coins</span><br>
+            {#if product.median}
+            Median: <span class="text-white">{simplify_num(product.median)} coins</span><br>
             {/if}
-            Profit: <span class="text-white">{simplify_num(sellPrice - craftCost)}</span>
+            Profit: <span class="text-white">{simplify_num(product.sellPrice - product.craftCost)}</span>
         </p>
     </div>
 </div>

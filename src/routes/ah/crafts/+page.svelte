@@ -3,20 +3,18 @@
 </svelte:head>
 
 <script>
-    import { get_coflnet_crafts, process_coflnet_data } from "$lib";
+    import { SkyblockDataHandler, simplify_num } from "$lib";
     import CraftPreview from "src/components/CraftPreview.svelte";
 
-    const settings = {
-        sortBy: "profit"
-    }
-
     async function get_processed_data() {
-        return await process_coflnet_data(await get_coflnet_crafts(), settings);
+        const sb = await new SkyblockDataHandler();
+        const crafts = sb.find_crafts();
+        return crafts.splice(0, 50);
     }
 </script>
 
 <div class="container p-5">
-    <div class="text-center p-3 pb-5">
+    <!-- <div class="text-center p-3 pb-5">
         <h1 class="text-white"><strong>Settings</strong></h1>
     </div>
     <form class="bg-primary p-5 rounded">
@@ -30,11 +28,11 @@
                 </select>
             </div>
         </div>
-    </form>
+    </form> -->
     <div class="text-center p-3 pb-5">
         <h1 class="text-white"><strong>Top Crafts</strong></h1>
     </div>
-    {#key settings}
+    <!-- {#key settings} -->
         {#await get_processed_data() then data}
             <div class="row row-cols-1 row-cols-md-2 g-4 p-5 pt-0">
                 {#each data as product}
@@ -44,5 +42,5 @@
                 {/each}
             </div>
         {/await}
-    {/key}
+    <!-- {/key} -->
 </div>
