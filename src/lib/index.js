@@ -1,7 +1,7 @@
 export class SkyblockDataHandler {
-    constructor() {
+    constructor(settings) {
         return (async () => {
-            this.max_depth = 2;
+            this.settings = settings;
             this.item_mappings = await fetch("https://corsproxy.io/?https://github.com/kr45732/skyblock-plus-data/raw/main/InternalNameMappings.json").then(res => res.json())
             this.items = Object.keys(this.item_mappings);
             await this.update_data();
@@ -33,7 +33,7 @@ export class SkyblockDataHandler {
 
     get_item_price(id, remaining_depth=null) {
         if (remaining_depth == null) {
-            remaining_depth = this.max_depth;
+            remaining_depth = this.settings.maxDepth;
         }
         id = id.replaceAll("-", ":");
         const item_info = this.item_mappings[id];
@@ -42,7 +42,7 @@ export class SkyblockDataHandler {
             sell_price = this.ah_data[id];
         }
         else if (this.bz_keys.includes(id)) {
-            sell_price = this.bz_data[id].quick_status.sellPrice;
+            sell_price = this.settings.buyOrder === "true" ? this.bz_data[id].quick_status.buyPrice : this.bz_data[id].quick_status.sellPrice;
         }
         var price = 0
         if (remaining_depth > 0 && item_info["recipe"] != null) {
@@ -66,15 +66,14 @@ export class SkyblockDataHandler {
         return sell_price;
     }
 
-    find_crafts(max_depth=2) {
-        this.max_depth = max_depth;
+    find_crafts() {
         const results = [];
         for (const item of this.items) {
             try {
-                results.push({"itemId": item, "itemName": strip_color_codes(this.item_mappings[item].name), "sellPrice": this.get_item_price(item, 0), "craftCost": this.get_item_price(item, max_depth)});
+                results.push({"itemId": item, "itemName": strip_color_codes(this.item_mappings[item].name), "sellPrice": this.get_item_price(item, 0), "craftCost": this.get_item_price(item, this.settings.maxDepth)});
             } catch (e) {}
         }
-        return results.sort((x, y) => (y.sellPrice - y.craftCost) - (x.sellPrice - x.craftCost));
+        return results;
     }
 }
 
