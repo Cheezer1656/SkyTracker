@@ -5,6 +5,8 @@ Coflnet's paid craft flips are revealed when using their API, so there is a page
 
 ⚠️ **Note:** The custom AH flip finder and the bazaar item search are broken
 
+*If this app helps you please consider starring this repo* 🙂
+
 ## Bazaar Flips
 ![Bazaar Flips](images/bz_flips.png)
 ## Coflnet Flips
