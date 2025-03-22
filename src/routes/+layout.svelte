@@ -25,7 +25,7 @@
                     <div class="row">
                         <div class="col">
                             <li class="nav-item dropdown">
-                                <a id="bz-dropdown" class="nav-link dropdown-toggle text-white" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <a id="bz-dropdown" class="nav-link dropdown-toggle text-white" href={"#"} role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                     Bazaar
                                 </a>
                                 <ul class="dropdown-menu bg-secondary position-absolute" aria-labelledby="bz-dropdown">
@@ -35,7 +35,7 @@
                         </div>
                         <div class="col">
                             <li class="nav-item dropdown">
-                                <a id="ah-dropdown" class="nav-link dropdown-toggle text-white" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <a id="ah-dropdown" class="nav-link dropdown-toggle text-white" href={"#"} role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                     Auction House
                                 </a>
                                 <ul class="dropdown-menu bg-secondary position-absolute" aria-labelledby="ah-dropdown">
