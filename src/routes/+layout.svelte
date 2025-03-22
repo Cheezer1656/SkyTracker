@@ -11,10 +11,11 @@
 
 <nav class="navbar bg-primary">
     <div class="container-fluid">
-        <a class="navbar-brand text-white" href="/">SkyTracker</a>
+        <a class="navbar-brand text-white ms-1" href="/">SkyTracker</a>
+        <div class="border-start border-light me-3" style="height: 30px"></div>
         <ul class="navbar-nav me-auto">
             <div class="row">
-                <div class="col">
+                <div class="col mt-1 mb-1">
                     <li class="nav-item">
                         <form on:submit|preventDefault={e => {if (searchQuery != "") {window.location.replace("/bazaar/search?q="+searchQuery)}}}>
                             <input class="form-control bg-secondary text-white" style="border: none" type="text" bind:value={searchQuery}>
